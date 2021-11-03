@@ -61,6 +61,7 @@ KNOWN_DEVICES_KEY = "samsungtv_known_devices"
 CONF_TOKEN = "token"
 CONF_SESSIONID = "sessionid"
 CONF_KEY_POWER_OFF = "key_power_off"
+CONF_UUID = "uuid"
 CONF_TURN_ON_ACTION = "turn_on_action"
 MIN_TIME_BETWEEN_FORCED_SCANS = timedelta(seconds=2)
 MIN_TIME_BETWEEN_SCANS = timedelta(seconds=10)
@@ -91,6 +92,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
         vol.Optional(CONF_SESSIONID): cv.string,
         vol.Optional(CONF_KEY_POWER_OFF, default=DEFAULT_KEY_POWER_OFF): cv.string,
         vol.Optional(CONF_TURN_ON_ACTION, default=None): cv.SCRIPT_SCHEMA,
+        vol.Optional(CONF_UUID, default=None): cv.string,
     }
 )
 
@@ -126,6 +128,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
         sessionid = config.get(CONF_SESSIONID)
         key_power_off = config.get(CONF_KEY_POWER_OFF)
         turn_on_action = config.get(CONF_TURN_ON_ACTION)
+        uuid = config.get(CONF_UUID)
         if turn_on_action:
             turn_on_action = Script(hass, turn_on_action, name, 'media_player')
     elif discovery_info is not None:
